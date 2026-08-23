@@ -1,14 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import {
-  Globe,
-  BookOpen,
-  Gamepad2,
-  Video,
-  Link2,
-  GraduationCap,
-  Users,
-  type LucideIcon as LucideIconType,
-} from "lucide-react";
+import { Globe, BookOpen, Gamepad2, Video, Link2, GraduationCap, Users, type LucideIcon as LucideIconType } from "lucide-react";
 
 export type PlatformTag = "principal" | "docs" | "arcade" | "meet" | "shortener" | "learning" | "training";
 
