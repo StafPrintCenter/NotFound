@@ -14,24 +14,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: NOTFOUND_TITLE },
-      { name: "description", content: "Catch-all 404 de l’écosystème STAF PRINT CENTER. Redirection rapide vers les plateformes officielles." },
+      { name: "description", content: NOTFOUND_DESC },
       { name: "author", content: SITE.name },
       { property: "og:title", content: NOTFOUND_TITLE },
-      { property: "og:description", content: "Page d’atterrissage globale de l’écosystème STAF PRINT CENTER." },
+      { property: "og:description", content: NOTFOUND_DESC },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@stafprintcenter" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@100..800&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@100..800&display=swap"
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
