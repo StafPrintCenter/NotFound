@@ -5,19 +5,22 @@ import appCss from "../styles.css?url";
 import { SITE } from "@/data/site";
 import { NotFoundComponent, ErrorComponent } from "@/components/errors";
 
+const NOTFOUND_TITLE = `404 Sous-domaine inexistant ${SITE.name}`;
+const NOTFOUND_DESC = `Catch-all 404 de l’écosystème STAF PRINT CENTER. Redirection rapide vers les plateformes officielles.`;
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "STAF PRINT CENTER — 404 Sous-domaine inexistant" },
+      { title: NOTFOUND_TITLE },
       { name: "description", content: "Catch-all 404 de l’écosystème STAF PRINT CENTER. Redirection rapide vers les plateformes officielles." },
-      { name: "author", content: "STAF PRINT CENTER" },
-      { property: "og:title", content: "STAF PRINT CENTER — 404 Sous-domaine inexistant" },
+      { name: "author", content: SITE.name },
+      { property: "og:title", content: NOTFOUND_TITLE },
       { property: "og:description", content: "Page d’atterrissage globale de l’écosystème STAF PRINT CENTER." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@stafprint" },
+      { name: "twitter:site", content: "@stafprintcenter" },
     ],
     links: [
       {
