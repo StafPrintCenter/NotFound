@@ -1,0 +1,199 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system — STAF PRINT CENTER Catch-All 404.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-staf-orange -> bg-staf-orange, text-staf-orange).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  /* STAF brand accents */
+  --color-staf-orange: var(--staf-orange);
+  --color-staf-orange-deep: var(--staf-orange-deep);
+  --color-staf-orange-soft: var(--staf-orange-soft);
+  --color-staf-coral: var(--staf-coral);
+  --color-staf-slate: var(--staf-slate);
+  --color-staf-slate-muted: var(--staf-slate-muted);
+  --color-staf-ink: var(--staf-ink);
+
+  /* Semantic tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Font families */
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-inter-tight);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --font-fraunces: "Fraunces", Georgia, serif;
+  --font-inter-tight: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-jetbrains-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+
+  /* STAF brand — warm off-white light mode */
+  --background: oklch(0.988 0.01 89.985);
+  --foreground: oklch(0.208 0.05 90.954);
+  --card: oklch(1 0 90);
+  --card-foreground: oklch(0.208 0.05 90.954);
+  --popover: oklch(1 0 90);
+  --popover-foreground: oklch(0.208 0.05 90.954);
+  --primary: oklch(0.705 0.18 81.662);
+  --primary-foreground: oklch(1 0.01 90);
+  --secondary: oklch(0.988 0.01 90);
+  --secondary-foreground: oklch(0.208 0.05 90.954);
+  --muted: oklch(0.964 0.01 89);
+  --muted-foreground: oklch(0.554 0.05 90.954);
+  --accent: oklch(0.964 0.01 89);
+  --accent-foreground: oklch(0.208 0.05 90.954);
+  --destructive: oklch(0.637 0.2 76.459);
+  --destructive-foreground: oklch(1 0.01 90);
+  --border: oklch(0.854 0.02 90);
+  --input: oklch(0.854 0.02 90);
+  --ring: oklch(0.705 0.18 81.662);
+
+  --staf-orange: oklch(0.705 0.18 81.662);
+  --staf-orange-deep: oklch(0.646 0.19 79.643);
+  --staf-orange-soft: oklch(0.758 0.16 84.297);
+  --staf-coral: oklch(0.637 0.2 76.459);
+  --staf-slate: oklch(0.554 0.05 90.954);
+  --staf-slate-muted: oklch(0.647 0.04 91);
+  --staf-ink: oklch(0.208 0.05 90.954);
+
+  --chart-1: oklch(0.705 0.18 81.662);
+  --chart-2: oklch(0.646 0.19 79.643);
+  --chart-3: oklch(0.637 0.2 76.459);
+  --chart-4: oklch(0.554 0.05 90.954);
+  --chart-5: oklch(0.758 0.16 84.297);
+  --sidebar: oklch(0.988 0.01 89.985);
+  --sidebar-foreground: oklch(0.208 0.05 90.954);
+  --sidebar-primary: oklch(0.705 0.18 81.662);
+  --sidebar-primary-foreground: oklch(1 0.01 90);
+  --sidebar-accent: oklch(0.964 0.01 89);
+  --sidebar-accent-foreground: oklch(0.208 0.05 90.954);
+  --sidebar-border: oklch(0.854 0.02 90);
+  --sidebar-ring: oklch(0.705 0.18 81.662);
+}
+
+.dark {
+  --background: oklch(0.208 0.05 90.954);
+  --foreground: oklch(0.988 0.01 89.985);
+  --card: oklch(0.279 0.06 91.462);
+  --card-foreground: oklch(0.988 0.01 89.985);
+  --popover: oklch(0.279 0.06 91.462);
+  --popover-foreground: oklch(0.988 0.01 89.985);
+  --primary: oklch(0.705 0.18 81.662);
+  --primary-foreground: oklch(0.208 0.05 90.954);
+  --secondary: oklch(0.279 0.06 91.462);
+  --secondary-foreground: oklch(0.988 0.01 89.985);
+  --muted: oklch(0.279 0.06 91.462);
+  --muted-foreground: oklch(0.754 0.05 90);
+  --accent: oklch(0.279 0.06 91.462);
+  --accent-foreground: oklch(0.988 0.01 89.985);
+  --destructive: oklch(0.637 0.2 76.459);
+  --destructive-foreground: oklch(0.988 0.01 89.985);
+  --border: oklch(1 0 90 / 10%);
+  --input: oklch(1 0 90 / 15%);
+  --ring: oklch(0.705 0.18 81.662);
+
+  --staf-ink: oklch(0.988 0.01 89.985);
+
+  --chart-1: oklch(0.705 0.18 81.662);
+  --chart-2: oklch(0.646 0.19 79.643);
+  --chart-3: oklch(0.637 0.2 76.459);
+  --chart-4: oklch(0.554 0.05 90.954);
+  --chart-5: oklch(0.758 0.16 84.297);
+  --sidebar: oklch(0.279 0.06 91.462);
+  --sidebar-foreground: oklch(0.988 0.01 89.985);
+  --sidebar-primary: oklch(0.705 0.18 81.662);
+  --sidebar-primary-foreground: oklch(0.208 0.05 90.954);
+  --sidebar-accent: oklch(0.354 0.06 91);
+  --sidebar-accent-foreground: oklch(0.988 0.01 89.985);
+  --sidebar-border: oklch(1 0 90 / 10%);
+  --sidebar-ring: oklch(0.705 0.18 81.662);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+
+  code, kbd, pre {
+    font-family: var(--font-mono);
+  }
+}
+
+@utility paper-grid {
+  background-image:
+    linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+  mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility ring-staf {
+  box-shadow: 0 0 0 1px var(--color-staf-orange) inset, 0 0 0 4px color-mix(in oklch, var(--color-staf-orange) 20%, transparent);
+}
