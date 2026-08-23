@@ -68,18 +68,14 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* Font families */
-  --font-display: var(--font-fraunces);
-  --font-body: var(--font-inter-tight);
-  --font-mono: var(--font-jetbrains-mono);
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
 }
 
 :root {
   --radius: 0.75rem;
-
-  --font-fraunces: "Fraunces", Georgia, serif;
-  --font-inter-tight: "Inter Tight", "Inter", system-ui, sans-serif;
-  --font-jetbrains-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
-
   /* STAF brand — warm off-white light mode */
   --background: oklch(0.988 0.01 89.985);
   --foreground: oklch(0.208 0.05 90.954);
@@ -173,11 +169,18 @@
     font-family: var(--font-body);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
   }
 
-  code, kbd, pre {
+  code,
+  kbd,
+  pre {
     font-family: var(--font-mono);
   }
 }
