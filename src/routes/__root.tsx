@@ -6,7 +6,7 @@ import { SITE } from "@/data/site";
 import { NotFoundComponent, ErrorComponent } from "@/components/errors";
 
 const NOTFOUND_TITLE = `404 Sous-domaine inexistant ${SITE.name}`;
-const NOTFOUND_DESC = `Catch-all 404 de l’écosystème STAF PRINT CENTER. Redirection rapide vers les plateformes officielles.`;
+const NOTFOUND_DESC = `Catch-all 404 de l’écosystème ${SITE.name}. Redirection rapide vers les plateformes officielles.`;
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
