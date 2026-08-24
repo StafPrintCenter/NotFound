@@ -14,7 +14,7 @@ export function Header() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-staf-coral opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-staf-coral" />
           </span>
-          Erreur 404 — Sous-domaine inexistant
+          Erreur 404 - Sous-domaine inexistant
         </div>
       </div>
     </header>
