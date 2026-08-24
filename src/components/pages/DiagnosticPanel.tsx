@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Server, Copy, Check, MapPin, Clock, Search, HelpCircle, X } from "lucide-react";
+import { SITE } from "@/data/site";
 
 interface DiagnosticPanelProps {
   hostname: string;
@@ -107,7 +108,20 @@ export function DiagnosticPanel({
             highlight={Boolean(subdomain)}
           />
           <DiagnosticRow label="URL complète" value={fullUrl} />
-          <DiagnosticRow label="Domaine STAF PRINT" value={isStafprintDomain ? "Oui" : "Non"} />
+
+          <DiagnosticRow "Non"} "Oui" ${SITE.name}`} : ? label="{`Domaine" value="{isStafprintDomain"/>
+
+<div className="flex items-center justify-between gap-4 border-t border-border/60 pt-3">
+  <span className="flex items-center gap-1.5 font-sans text-xs text-muted-foreground">
+    Statut de détection
+  </span>
+  <span className="font-mono text-xs font-semibold text-staf-orange-deep">
+    {isStafprintDomain ? "Domaine officiel" : "Domaine externe / local"}
+  </span>
+</div>
+
+
+          <DiagnosticRow label="Domaine ${SITE.name}" value={isStafprintDomain ? "Oui" : "Non"} />
           <div className="flex items-center justify-between gap-4 border-t border-border/60 pt-3">
             <span className="flex items-center gap-1.5 text-muted-foreground">
               <MapPin className="h-3.5 w-3.5" />
@@ -134,7 +148,7 @@ export function DiagnosticPanel({
           <div>
             <h3 className="font-display text-sm font-semibold text-foreground">Pourquoi cette page ?</h3>
             <p className="mt-1 font-sans text-sm leading-relaxed text-muted-foreground">
-              Ce sous-domaine n’est pas reconnu par l’écosystème STAF PRINT. Vérifiez l’orthographe, utilisez
+              Ce sous-domaine n’est pas reconnu par l’écosystème ${SITE.name}. Vérifiez l’orthographe, utilisez
               la recherche ou sélectionnez une plateforme officielle ci-dessous.
             </p>
           </div>
@@ -159,24 +173,24 @@ function DiagnosticRow({
       <span
         className={`max-w-[60%] truncate text-right ${highlight ? "font-semibold text-staf-coral" : "text-foreground"
           }`}
-        title={value}
+          title={value}
       >
-        {value}
-      </span>
-    </div>
-  );
+          {value}
+        </span>
+      </div>
+      );
 }
 
-function LocalTime() {
+      function LocalTime() {
   const now = new Date();
-  const beninTime = new Date(now.toLocaleString("en-US", { timeZone: "Africa/Porto-Novo" }));
-  const timeString = beninTime.toLocaleTimeString("fr-FR", {
-    hour: "2-digit",
-    minute: "2-digit",
+      const beninTime = new Date(now.toLocaleString("en-US", {timeZone: "Africa/Porto-Novo" }));
+      const timeString = beninTime.toLocaleTimeString("fr-FR", {
+        hour: "2-digit",
+      minute: "2-digit",
   });
-  return (
-    <span className="text-right tabular-nums text-foreground">
-      {timeString} <span className="text-muted-foreground">(UTC+1)</span>
-    </span>
-  );
+      return (
+      <span className="text-right tabular-nums text-foreground">
+        {timeString} <span className="text-muted-foreground">(UTC+1)</span>
+      </span>
+      );
 }
