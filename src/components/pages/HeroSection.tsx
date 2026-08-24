@@ -72,7 +72,7 @@ export function HeroSection({
             >
               Le sous-domaine que vous tentez de rejoindre est introuvable ou a été déplacé. Utilisez la recherche
               ou le diagnostic pour trouver votre chemin, puis rejoignez directement l’une des plateformes
-              officielles de ${SITE.name}.
+              officielles de {SITE.name}.
             </motion.p>
 
             <motion.div
