@@ -1,5 +1,5 @@
 import logo from "@/assets/logos.json";
-import { SITE, SITE_LINK } from "@/data/site";
+import { SITE_LINK } from "@/data/site";
 
 export function Header() {
   return (
