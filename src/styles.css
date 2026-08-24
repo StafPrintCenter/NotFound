@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system — STAF PRINT CENTER Catch-All 404.
+ * Design system - STAF PRINT CENTER Catch-All 404.
  *
  * The @theme inline block maps CSS custom properties to Tailwind utility
  * classes (e.g. --color-staf-orange -> bg-staf-orange, text-staf-orange).
@@ -76,7 +76,7 @@
 
 :root {
   --radius: 0.75rem;
-  /* STAF brand — warm off-white light mode */
+  /* STAF brand - warm off-white light mode */
   --background: oklch(0.988 0.01 89.985);
   --foreground: oklch(0.208 0.05 90.954);
   --card: oklch(1 0 90);
