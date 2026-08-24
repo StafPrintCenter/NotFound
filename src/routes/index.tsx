@@ -1,27 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  AlertTriangle,
-  ArrowUpRight,
-  Mail,
-  Search,
-  HelpCircle,
-  Server,
-  Clock,
-  MapPin,
-  Copy,
-  Check,
-  X,
-} from "lucide-react";
+import { AlertTriangle, ArrowUpRight, Mail, Search, HelpCircle, Server, Clock, MapPin, Copy, Check, X } from "lucide-react";
 import { useState, useMemo } from "react";
 
 import { useSubdomainDetector } from "@/lib/useSubdomainDetector";
 import {
   platforms,
   contactMailto,
-  officialCopy,
-  statusBadge,
 } from "@/lib/platformsData";
+
+import { SITE, SITE_LINK } from "@/data/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -112,7 +100,7 @@ function NotFoundPage() {
             className="group flex min-w-0 items-center gap-3 transition-opacity hover:opacity-90"
             aria-label="Retourner sur le site principal de STAF PRINT CENTER"
           >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-staf-orange to-staf-orange-deep font-display text-lg font-bold text-primary-foreground shadow-sm">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-staf-orange to-staf-orange-deep font-display text-lg font-bold text-primary-foreground shadow-sm">
               SP
             </div>
             <div className="flex min-w-0 flex-col">
@@ -130,7 +118,7 @@ function NotFoundPage() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-staf-coral opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-staf-coral" />
             </span>
-            {statusBadge.label}
+            Erreur 404 — Sous-domaine inexistantzz
           </div>
         </div>
       </header>
@@ -149,7 +137,7 @@ function NotFoundPage() {
               >
                 <motion.div variants={itemVariants} className="mb-6 inline-flex items-center justify-center lg:justify-start">
                   <div className="relative flex h-28 w-28 items-center justify-center sm:h-36 sm:w-36">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-staf-orange/20 to-staf-coral/20 blur-2xl" />
+                    <div className="absolute inset-0 rounded-full bg-linear-to-tr from-staf-orange/20 to-staf-coral/20 blur-2xl" />
                     <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-staf-coral/20 bg-background shadow-xl sm:h-32 sm:w-32">
                       <span className="font-display text-5xl font-bold text-staf-coral sm:text-6xl">404</span>
                     </div>
@@ -186,7 +174,7 @@ function NotFoundPage() {
                 >
                   <a
                     href="https://stafprint.com"
-                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-staf-orange to-staf-orange-deep px-5 py-3 font-sans text-sm font-semibold text-primary-foreground shadow-lg shadow-staf-orange/20 transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-staf-orange focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-staf-orange to-staf-orange-deep px-5 py-3 font-sans text-sm font-semibold text-primary-foreground shadow-lg shadow-staf-orange/20 transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-staf-orange focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
                     Aller sur le site principal
                     <ArrowUpRight className="h-4 w-4" />
@@ -390,7 +378,7 @@ function NotFoundPage() {
       <footer className="relative z-10 border-t border-border/60 bg-background/80 px-4 py-8 backdrop-blur-md sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-4 sm:grid-cols-[minmax(0,1fr)_auto]">
           <p className="text-center font-sans text-sm text-muted-foreground sm:text-left">
-            {officialCopy.copyright}
+            © {new Date().getFullYear()} {SITE.name} - {SITE.slogan}.
           </p>
 
           <a
