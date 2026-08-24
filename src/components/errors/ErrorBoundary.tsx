@@ -15,7 +15,7 @@ export function ErrorComponent({ error, reset }: { error: Error; reset: () => vo
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-background px-6 py-12 overflow-hidden select-none">
       {/* Effet visuel d'erreur critique en arrière-plan */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-destructive/10 blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 rounded-full bg-destructive/10 blur-[140px] pointer-events-none" />
 
       <div className="relative z-10 max-w-xl w-full">
         <div className="rounded-3xl border border-border/80 bg-card/80 backdrop-blur-xl p-8 md:p-10 shadow-2xl">
