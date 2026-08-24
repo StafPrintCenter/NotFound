@@ -1,7 +1,7 @@
 import { motion, type Variants } from "framer-motion";
 import { AlertTriangle, ArrowUpRight, Mail } from "lucide-react";
-import { SITE_LINK } from "@/data/site";
-import { contactMailto, type Platform } from "@/lib/platformsData";
+import { SITE, SITE_LINK } from "@/data/site";
+import { contactMailto } from "@/lib/platformsData";
 import { DiagnosticPanel } from "./DiagnosticPanel";
 
 interface HeroSectionProps {
@@ -72,7 +72,7 @@ export function HeroSection({
             >
               Le sous-domaine que vous tentez de rejoindre est introuvable ou a été déplacé. Utilisez la recherche
               ou le diagnostic pour trouver votre chemin, puis rejoignez directement l’une des plateformes
-              officielles de STAF PRINT CENTER.
+              officielles de ${SITE.name}.
             </motion.p>
 
             <motion.div
