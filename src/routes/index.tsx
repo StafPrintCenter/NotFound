@@ -2,27 +2,22 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertTriangle, ArrowUpRight, Mail, X } from "lucide-react";
 import { useState, useMemo } from "react";
-
 import { useSubdomainDetector } from "@/lib/useSubdomainDetector";
 import { platforms, contactMailto } from "@/lib/platformsData";
 import { stripProtocol } from "@/lib/domain";
 import { Header, Footer, DiagnosticPanel, PlatformCard } from "@/components/pages";
+import { SITE } from "@/data/site";
+
+const NOTFOUND_TITLE = `404 Sous-domaine inexistant ${SITE.name}`;
+const NOTFOUND_DESC = `Catch-all 404 de l’écosystème STAF PRINT CENTER. Redirection rapide vers les plateformes officielles.`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "404 - Sous-domaine inexistant | STAF PRINT CENTER" },
-      {
-        name: "description",
-        content:
-          "Ce sous-domaine de l’écosystème STAF PRINT CENTER n’existe pas. Diagnostiquez la requête et rejoignez directement les plateformes officielles.",
-      },
-      { property: "og:title", content: "404 - Sous-domaine inexistant | STAF PRINT CENTER" },
-      {
-        property: "og:description",
-        content:
-          "Catch-all 404 de l’écosystème STAF PRINT CENTER. Diagnostic en temps réel et redirection rapide vers les plateformes officielles.",
-      },
+      { title: NOTFOUND_TITLE },
+      { name: "description", content: NOTFOUND_DESC },
+      { property: "og:title", content: NOTFOUND_TITLE },
+      { property: "og:description", content: NOTFOUND_DESC },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
