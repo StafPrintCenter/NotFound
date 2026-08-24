@@ -11,13 +11,13 @@ import { Header, Footer, DiagnosticPanel, PlatformCard } from "@/components/page
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "404 — Sous-domaine inexistant | STAF PRINT CENTER" },
+      { title: "404 - Sous-domaine inexistant | STAF PRINT CENTER" },
       {
         name: "description",
         content:
           "Ce sous-domaine de l’écosystème STAF PRINT CENTER n’existe pas. Diagnostiquez la requête et rejoignez directement les plateformes officielles.",
       },
-      { property: "og:title", content: "404 — Sous-domaine inexistant | STAF PRINT CENTER" },
+      { property: "og:title", content: "404 - Sous-domaine inexistant | STAF PRINT CENTER" },
       {
         property: "og:description",
         content:
@@ -79,7 +79,7 @@ function NotFoundPage() {
         <section className="px-4 pb-8 pt-12 sm:px-6 sm:pt-20 lg:px-8 lg:pt-24">
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-              {/* Left column — message */}
+              {/* Left column - message */}
               <motion.div
                 className="flex flex-col justify-center"
                 variants={containerVariants}
@@ -140,7 +140,7 @@ function NotFoundPage() {
                 </motion.div>
               </motion.div>
 
-              {/* Right column — interactive details */}
+              {/* Right column - interactive details */}
               <motion.div
                 className="flex flex-col justify-center"
                 variants={containerVariants}
