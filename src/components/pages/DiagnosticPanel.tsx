@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
-import { Server, Copy, Check, MapPin, Clock, Search, HelpCircle, X } from "lucide-react";
 import { SITE } from "@/data/site";
+import {
+  PlatformSearch,
+  DiagnosticHeader,
+  DiagnosticRow, LocationRow, LocalTime,
+  DiagnosticTip
+} from "./diagnostic";
 
 interface DiagnosticPanelProps {
   hostname: string;
@@ -13,114 +17,6 @@ interface DiagnosticPanelProps {
   totalCount: number;
 }
 
-function useDetectedRegion() {
-  const [region, setRegion] = useState<string>(() => getFallbackRegion());
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    fetch("https://ipapi.co/json/", { signal: controller.signal })
-      .then((res) => {
-        if (!res.ok) throw new Error("Erreur réseau");
-        return res.json();
-      })
-      .then((data) => {
-        if (data.city && data.country_name) {
-          setRegion(`${data.city}, ${data.country_name}`);
-        }
-      })
-      .catch(() => {
-        // En cas d'erreur/adblock, garder la valeur issue du Timezone
-        setRegion(getFallbackRegion());
-      });
-
-    return () => controller.abort();
-  }, []);
-
-  return region;
-}
-
-/**
- * Extrait une région propre à partir du Timezone du navigateur (Méthode 1)
- */
-function getFallbackRegion(): string {
-  try {
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    if (!timeZone) return "Non détectée";
-
-    const parts = timeZone.split("/");
-    const city = parts[1] ? parts[1].replace(/_/g, " ") : parts[0];
-    const regionName = parts[0];
-
-    return `${city} (${regionName})`;
-  } catch {
-    return "Non détectée";
-  }
-}
-
-/**
- * Affiche l'heure locale de l'utilisateur avec mise à jour en temps réel
- */
-function LocalTime() {
-  const [timeString, setTimeString] = useState<string>("");
-  const [timeZoneOffset, setTimeZoneOffset] = useState<string>("");
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-
-      // Heure formatée HH:mm:ss
-      setTimeString(
-        now.toLocaleTimeString("fr-FR", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        })
-      );
-
-      // Calcul du décalage GMT/UTC (ex: UTC+1)
-      const offsetMinutes = -now.getTimezoneOffset();
-      const offsetHours = Math.floor(Math.abs(offsetMinutes) / 60);
-      const sign = offsetMinutes >= 0 ? "+" : "-";
-      setTimeZoneOffset(`UTC${sign}${offsetHours}`);
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <span className="text-right tabular-nums text-foreground">
-      {timeString || "--:--:--"}{" "}
-      {timeZoneOffset && <span className="text-muted-foreground">({timeZoneOffset})</span>}
-    </span>
-  );
-}
-
-function DiagnosticRow({
-  label,
-  value,
-  highlight,
-}: {
-  label: string;
-  value: string;
-  highlight?: boolean;
-}) {
-  return (
-    <div className="flex items-center justify-between gap-4">
-      <span className="text-muted-foreground">{label}</span>
-      <span
-        className={`max-w-[60%] truncate text-right ${highlight ? "font-semibold text-staf-coral" : "text-foreground"
-          }`}
-        title={value}
-      >
-        {value}
-      </span>
-    </div>
-  );
-}
-
 export function DiagnosticPanel({
   hostname,
   subdomain,
@@ -131,84 +27,18 @@ export function DiagnosticPanel({
   filteredCount,
   totalCount,
 }: DiagnosticPanelProps) {
-  const [copied, setCopied] = useState(false);
-  const region = useDetectedRegion();
-
-  const handleCopyUrl = async () => {
-    try {
-      await navigator.clipboard.writeText(fullUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // Ignore
-    }
-  };
-
   return (
     <div className="space-y-5">
-      {/* Search */}
-      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-        <label
-          htmlFor="platform-search"
-          className="mb-3 flex items-center gap-2 font-display text-sm font-semibold text-card-foreground"
-        >
-          <Search className="h-4 w-4 text-staf-orange" />
-          Trouver une plateforme
-        </label>
-        <div className="relative">
-          <input
-            id="platform-search"
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Ex: docs, meet, learn, arcade…"
-            className="w-full rounded-xl border border-border bg-background px-4 py-3 pl-10 font-sans text-sm text-foreground placeholder:text-muted-foreground focus:border-staf-orange/50 focus:outline-none focus:ring-2 focus:ring-staf-orange/20"
-            aria-label="Rechercher une plateforme officielle"
-          />
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          {query && (
-            <button
-              type="button"
-              onClick={() => setQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-              aria-label="Effacer la recherche"
-            >
-              <X className="h-3.5 w-3.5" />
-            </button>
-          )}
-        </div>
-        <p className="mt-2 font-sans text-xs text-muted-foreground">
-          {filteredCount} plateforme{filteredCount > 1 ? "s" : ""} trouvée
-          {filteredCount > 1 ? "s" : ""} sur {totalCount}
-        </p>
-      </div>
+      <PlatformSearch
+        query={query}
+        setQuery={setQuery}
+        filteredCount={filteredCount}
+        totalCount={totalCount}
+      />
 
-      {/* Diagnostic Card */}
-      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <div className="flex min-w-0 items-center gap-2 font-display text-sm font-semibold text-card-foreground">
-            <Server className="h-4 w-4 shrink-0 text-staf-coral" />
-            <span className="truncate">Diagnostic de la requête</span>
-          </div>
-          <button
-            type="button"
-            onClick={handleCopyUrl}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 py-1.5 font-sans text-xs font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-staf-orange"
-            aria-label="Copier l’URL complète"
-          >
-            {copied ? (
-              <>
-                <Check className="h-3.5 w-3.5 text-emerald-600" />
-                Copié
-              </>
-            ) : (
-              <>
-                <Copy className="h-3.5 w-3.5" />
-                Copier
-              </>
-            )}
-          </button>
-        </div>
+      <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
+        <DiagnosticHeader fullUrl={fullUrl} />
+
         <div className="space-y-3 font-mono text-xs">
           <DiagnosticRow label="Hôte détecté" value={hostname} />
           <DiagnosticRow
@@ -219,39 +49,12 @@ export function DiagnosticPanel({
           <DiagnosticRow label="URL complète" value={fullUrl} />
           <DiagnosticRow label={`Domaine ${SITE.name}`} value={isStafprintDomain ? "Oui" : "Non"} />
 
-          <div className="flex items-center justify-between gap-4 border-t border-border/60 pt-3">
-            <span className="flex items-center gap-1.5 text-muted-foreground">
-              <MapPin className="h-3.5 w-3.5" />
-              Région
-            </span>
-            <span className="text-right text-foreground">{region}</span>
-          </div>
-
-          <div className="flex items-center justify-between gap-4">
-            <span className="flex items-center gap-1.5 text-muted-foreground">
-              <Clock className="h-3.5 w-3.5" />
-              Heure locale
-            </span>
-            <LocalTime />
-          </div>
+          <LocationRow />
+          <LocalTime />
         </div>
       </div>
 
-      {/* Quick Tip */}
-      <div className="rounded-2xl border border-staf-orange/20 bg-staf-orange/5 p-5">
-        <div className="flex items-start gap-3">
-          <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-staf-orange/10">
-            <HelpCircle className="h-5 w-5 text-staf-orange" />
-          </div>
-          <div>
-            <h3 className="font-display text-sm font-semibold text-foreground">Pourquoi cette page ?</h3>
-            <p className="mt-1 font-sans text-sm leading-relaxed text-muted-foreground">
-              Ce sous-domaine n’est pas reconnu par l’écosystème {SITE.name}. Vérifiez l’orthographe, utilisez
-              la recherche ou sélectionnez une plateforme officielle ci-dessous.
-            </p>
-          </div>
-        </div>
-      </div>
+      <DiagnosticTip />
     </div>
   );
 }
