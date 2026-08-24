@@ -7,7 +7,6 @@ export interface Platform {
   description: string;
   url: string;
   logoKey: keyof typeof logos;
-  accent: "orange" | "coral" | "slate";
   isExternal: boolean;
 }
 
@@ -18,7 +17,6 @@ export const platforms: Platform[] = [
     description: `Le site principal de ${SITE.name} : services, réalisations, formations, blog et contact.`,
     url: SITE_LINK.landingUrl,
     logoKey: "mc",
-    accent: "orange",
     isExternal: true,
   },
   {
@@ -27,7 +25,6 @@ export const platforms: Platform[] = [
     description: `Raccourcisseur de liens officiel, réservé exclusivement aux contenus de ${SITE.name}.`,
     url: SITE_LINK.shortUrl,
     logoKey: "shortener",
-    accent: "orange",
     isExternal: true,
   },
   {
@@ -36,7 +33,6 @@ export const platforms: Platform[] = [
     description: `Préparer, animer et évaluer les sessions de formation : parcours, supports, présence, notation et suivi des apprenants pour ${SITE.name}.`,
     url: SITE_LINK.instructorUrl,
     logoKey: "instructor",
-    accent: "slate",
     isExternal: true,
   },
   {
@@ -45,7 +41,6 @@ export const platforms: Platform[] = [
     description: `S'inscrire à une formation, suivre ses cours, rendre ses devoirs et récupérer ses attestations depuis le Student Hub de ${SITE.name}.`,
     url: SITE_LINK.studentUrl,
     logoKey: "student",
-    accent: "slate",
     isExternal: true,
   },
   {
@@ -54,7 +49,6 @@ export const platforms: Platform[] = [
     description: `Plateforme de visioconférence pour les réunions et sessions à distance de ${SITE.name}.`,
     url: SITE_LINK.meetUrl,
     logoKey: "meet",
-    accent: "coral",
     isExternal: true,
   },
   {
@@ -63,7 +57,6 @@ export const platforms: Platform[] = [
     description: `Hub de jeux interactifs pour se divertir tout en développant ses compétences techniques.`,
     url: SITE_LINK.arcadeUrl,
     logoKey: "arcade",
-    accent: "orange",
     isExternal: true,
   },
   {
@@ -72,7 +65,6 @@ export const platforms: Platform[] = [
     description: `Guides, procédures et ressources techniques de ${SITE.name}.`,
     url: SITE_LINK.docsUrl,
     logoKey: "docs",
-    accent: "slate",
     isExternal: true,
   },
 ];
