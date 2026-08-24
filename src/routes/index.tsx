@@ -5,8 +5,8 @@ import { useState, useMemo } from "react";
 import { useSubdomainDetector } from "@/lib/useSubdomainDetector";
 import { platforms, contactMailto } from "@/lib/platformsData";
 import { stripProtocol } from "@/lib/domain";
+import { SITE, SITE_LINK } from "@/data/site";
 import { Header, Footer, DiagnosticPanel, PlatformCard } from "@/components/pages";
-import { SITE } from "@/data/site";
 
 const NOTFOUND_TITLE = `404 Sous-domaine inexistant ${SITE.name}`;
 const NOTFOUND_DESC = `Catch-all 404 de l’écosystème STAF PRINT CENTER. Redirection rapide vers les plateformes officielles.`;
@@ -46,7 +46,8 @@ function NotFoundPage() {
   const { hostname, subdomain, fullUrl, isStafprintDomain } = useSubdomainDetector();
   const [query, setQuery] = useState("");
 
-  const displayDomain = isStafprintDomain && subdomain ? `${subdomain}.stafprint.com` : hostname;
+  const mainDomain = stripProtocol(SITE_LINK.landingUrl);
+  const displayDomain = isStafprintDomain && subdomain ? `${subdomain}.${mainDomain}` : hostname;
 
   const filteredPlatforms = useMemo(() => {
     if (!query.trim()) return platforms;
@@ -119,7 +120,7 @@ function NotFoundPage() {
                   className="mt-8 flex flex-wrap items-center gap-3"
                 >
                   <a
-                    href="https://stafprint.com"
+                    href={SITE_LINK.landingUrl}
                     className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-staf-orange to-staf-orange-deep px-5 py-3 font-sans text-sm font-semibold text-primary-foreground shadow-lg shadow-staf-orange/20 transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-staf-orange focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
                     Aller sur le site principal
@@ -184,7 +185,7 @@ function NotFoundPage() {
                 exit={{ opacity: 0, transition: { duration: 0.2 } }}
               >
                 {filteredPlatforms.map((platform) => (
-                  <motion.div key={platform.id} variants={itemVariants}>
+                  <motion.div key={platform.id} variants={itemVariants} className="h-full">
                     <PlatformCard platform={platform} />
                   </motion.div>
                 ))}
