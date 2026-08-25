@@ -7,7 +7,7 @@ interface SubdomainInfo {
   subdomain: string | null;
   /** URL complète d'origine ou courante */
   fullUrl: string;
-  /** Whether the detected hostname belongs to stafprint.com */
+  /** Indique si le domaine détecté appartient à stafprint.com */
   isStafprintDomain: boolean;
 }
 
