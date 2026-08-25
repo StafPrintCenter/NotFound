@@ -1,6 +1,8 @@
 import logos from "@/assets/logos.json";
 import { SITE, SITE_LINK } from "@/data/site";
 
+export type PlatformStatus = "available" | "building";
+
 export interface Platform {
   id: string;
   name: string;
@@ -8,6 +10,7 @@ export interface Platform {
   url: string;
   logoKey: keyof typeof logos;
   isExternal: boolean;
+  status: PlatformStatus;
 }
 
 export const platforms: Platform[] = [
@@ -18,6 +21,7 @@ export const platforms: Platform[] = [
     url: SITE_LINK.landingUrl,
     logoKey: "mc",
     isExternal: true,
+    status: "available",
   },
   {
     id: "shortener",
@@ -26,6 +30,7 @@ export const platforms: Platform[] = [
     url: SITE_LINK.shortUrl,
     logoKey: "shortener",
     isExternal: true,
+    status: "available",
   },
   {
     id: "instructor",
@@ -34,6 +39,7 @@ export const platforms: Platform[] = [
     url: SITE_LINK.instructorUrl,
     logoKey: "instructor",
     isExternal: true,
+    status: "building",
   },
   {
     id: "student",
@@ -42,6 +48,7 @@ export const platforms: Platform[] = [
     url: SITE_LINK.studentUrl,
     logoKey: "student",
     isExternal: true,
+    status: "building",
   },
   {
     id: "meet",
@@ -50,6 +57,7 @@ export const platforms: Platform[] = [
     url: SITE_LINK.meetUrl,
     logoKey: "meet",
     isExternal: true,
+    status: "building",
   },
   {
     id: "arcade",
@@ -58,6 +66,7 @@ export const platforms: Platform[] = [
     url: SITE_LINK.arcadeUrl,
     logoKey: "arcade",
     isExternal: true,
+    status: "building",
   },
   {
     id: "documentation",
@@ -66,6 +75,7 @@ export const platforms: Platform[] = [
     url: SITE_LINK.docsUrl,
     logoKey: "docs",
     isExternal: true,
+    status: "available",
   },
 ];
 
