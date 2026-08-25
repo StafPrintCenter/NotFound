@@ -5,7 +5,7 @@ interface SubdomainInfo {
   hostname: string;
   /** Subdomain extracted from hostname (e.g. xyz, or null for apex) */
   subdomain: string | null;
-  /** Full error URL built from hostname */
+  /** URL complète d'origine ou courante */
   fullUrl: string;
   /** Whether the detected hostname belongs to stafprint.com */
   isStafprintDomain: boolean;
