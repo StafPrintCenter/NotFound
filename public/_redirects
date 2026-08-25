@@ -1,1 +1,5 @@
+# Ne pas rediriger notfound.stafprint.com pour afficher son contenu
+https://notfound.stafprint.com/*  /index.html  200
+
+# Rediriger tous les autres domaines vers notfound
 /*  https://notfound.stafprint.com/:splat  301!
