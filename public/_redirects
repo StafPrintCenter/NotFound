@@ -1,8 +1,5 @@
-# Ne pas rediriger notfound.stafprint.com
+# Ne pas rediriger notfound.stafprint.com pour afficher son contenu
 https://notfound.stafprint.com/*  /index.html  200
 
-# Rediriger tous les autres sous-domaines vers notfound en transmettant le domaine source
-https://:sub.stafprint.com/*  https://notfound.stafprint.com/:splat?original_url=https://:sub.stafprint.com/:splat  301!
-
-# Fallback générique
-/*  https://notfound.stafprint.com/?original_url=https://:host/*  301!
+# Rediriger tous les autres domaines vers notfound
+/*  https://notfound.stafprint.com/:splat  301!
