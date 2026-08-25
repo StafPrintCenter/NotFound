@@ -17,44 +17,56 @@ const FALLBACK_HOST = "notfound.stafprint.com";
 function extractSubdomain(hostname: string): string | null {
   if (!hostname) return null;
   const lower = hostname.toLowerCase();
-  if (lower === STAFPRINT_DOMAIN || lower === `www.${STAFPRINT_DOMAIN}`) return null;
+  if (lower === STAFPRINT_DOMAIN || lower === `www.${STAFPRINT_DOMAIN}` || lower === FALLBACK_HOST) {
+    return null;
+  }
   if (lower.endsWith(`.${STAFPRINT_DOMAIN}`)) {
     return lower.slice(0, -STAFPRINT_DOMAIN.length - 1);
   }
   return lower;
 }
 
-function resolveDetectedHost(): { hostname: string; fullUrl: string } {
+function resolveDetectedHost(): { hostname: string; subdomain: string | null; fullUrl: string } {
   if (typeof window === "undefined") {
-    return { hostname: FALLBACK_HOST, fullUrl: `https://${FALLBACK_HOST}` };
+    return { hostname: FALLBACK_HOST, subdomain: null, fullUrl: `https://${FALLBACK_HOST}` };
   }
 
   const currentUrl = new URL(window.location.href);
   const fromParam = currentUrl.searchParams.get("from") || currentUrl.searchParams.get("ref");
 
   if (fromParam) {
-    let sourceHost = fromParam.trim();
-    // Nettoyage au cas où le paramètre contient un protocole (ex: https://foo.stafprint.com)
-    sourceHost = sourceHost.replace(/^https?:\/\//i, "").split("/")[0];
+    let rawFrom = fromParam.trim().toLowerCase();
+
+    // Si la valeur contient déjà ".stafprint.com" ou est juste le préfixe
+    const fullHost = rawFrom.includes(".")
+      ? rawFrom
+      : `${rawFrom}.${STAFPRINT_DOMAIN}`;
+
+    const sub = rawFrom.includes(".")
+      ? extractSubdomain(rawFrom)
+      : rawFrom;
 
     return {
-      hostname: sourceHost,
-      fullUrl: `https://${sourceHost}${currentUrl.pathname}${currentUrl.search}`,
+      hostname: fullHost,
+      subdomain: sub,
+      fullUrl: `https://${fullHost}${currentUrl.pathname}`,
     };
   }
 
+  const host = window.location.hostname;
   return {
-    hostname: window.location.hostname,
+    hostname: host,
+    subdomain: extractSubdomain(host),
     fullUrl: window.location.href,
   };
 }
 
 export function useSubdomainDetector(): SubdomainInfo {
   const [info, setInfo] = useState<SubdomainInfo>(() => {
-    const { hostname, fullUrl } = resolveDetectedHost();
+    const { hostname, subdomain, fullUrl } = resolveDetectedHost();
     return {
       hostname,
-      subdomain: extractSubdomain(hostname),
+      subdomain,
       fullUrl,
       isStafprintDomain:
         hostname.toLowerCase().endsWith(STAFPRINT_DOMAIN) ||
@@ -66,10 +78,10 @@ export function useSubdomainDetector(): SubdomainInfo {
     if (typeof window === "undefined") return;
 
     const update = () => {
-      const { hostname, fullUrl } = resolveDetectedHost();
+      const { hostname, subdomain, fullUrl } = resolveDetectedHost();
       setInfo({
         hostname,
-        subdomain: extractSubdomain(hostname),
+        subdomain,
         fullUrl,
         isStafprintDomain:
           hostname.toLowerCase().endsWith(STAFPRINT_DOMAIN) ||
