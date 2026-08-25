@@ -47,7 +47,8 @@ export function DiagnosticPanel({
             highlight={Boolean(subdomain)}
           />
           <DiagnosticRow label="URL complète" value={fullUrl} />
-          <DiagnosticRow label={`Domaine ${SITE.name}`} value={isStafprintDomain ? "Oui" : "Non"} />
+          {/* <DiagnosticRow label={`Domaine ${SITE.name}`} value={isStafprintDomain ? "Oui" : "Non"} /> */}
+          <DiagnosticRow label={`Domaine ${SITE.name}`} value={"Non"} />
 
           <LocationRow />
           <LocalTime />
