@@ -66,7 +66,7 @@ export const platforms: Platform[] = [
     url: SITE_LINK.arcadeUrl,
     logoKey: "arcade",
     isExternal: true,
-    status: "building",
+    status: "available",
   },
   {
     id: "documentation",
