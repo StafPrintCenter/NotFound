@@ -1,8 +1,8 @@
-# 1. Servir le site notfound directement
+# Ne pas rediriger notfound.stafprint.com
 https://notfound.stafprint.com/*  /index.html  200
 
-# 2. Capturer le sous-domaine source et le transmettre en query parameter (?from=...)
-https://:subdomain.stafprint.com/*  https://notfound.stafprint.com/?from=:subdomain  302!
+# Rediriger tous les autres sous-domaines vers notfound en transmettant le domaine source
+https://:sub.stafprint.com/*  https://notfound.stafprint.com/:splat?original_url=https://:sub.stafprint.com/:splat  301!
 
-# 3. Fallback générique
-/*  https://notfound.stafprint.com/  302!
+# Fallback générique
+/*  https://notfound.stafprint.com/?original_url=https://:host/*  301!
