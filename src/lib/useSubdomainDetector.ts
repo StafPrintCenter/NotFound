@@ -1,92 +1,90 @@
 import { useEffect, useState } from "react";
 
 interface SubdomainInfo {
-  /** Full hostname (e.g. xyz.stafprint.com) */
+  /** Hostname détecté (ex: foo.stafprint.com ou fallback) */
   hostname: string;
-  /** Subdomain extracted from hostname (e.g. xyz, or null for apex) */
+  /** Sous-domaine extrait (ex: foo, ou null si aucun) */
   subdomain: string | null;
-  /** URL complète d'origine ou courante */
+  /** URL complète d'origine */
   fullUrl: string;
-  /** Indique si le domaine détecté appartient à stafprint.com */
+  /** Indique s'il s'agit d'un domaine de l'écosystème stafprint */
   isStafprintDomain: boolean;
 }
 
 const STAFPRINT_DOMAIN = "stafprint.com";
+const NOTFOUND_HOST = "notfound.stafprint.com";
 const FALLBACK_HOST = "notfound.stafprint.com";
 
 function extractSubdomain(hostname: string): string | null {
   if (!hostname) return null;
   const lower = hostname.toLowerCase();
-  if (lower === STAFPRINT_DOMAIN || lower === `www.${STAFPRINT_DOMAIN}` || lower === FALLBACK_HOST) {
+
+  if (
+    lower === STAFPRINT_DOMAIN ||
+    lower === `www.${STAFPRINT_DOMAIN}` ||
+    lower === NOTFOUND_HOST
+  ) {
     return null;
   }
+
   if (lower.endsWith(`.${STAFPRINT_DOMAIN}`)) {
     return lower.slice(0, -STAFPRINT_DOMAIN.length - 1);
   }
+
   return lower;
 }
 
-function resolveDetectedHost(): { hostname: string; subdomain: string | null; fullUrl: string } {
+function resolveContextInfo(): SubdomainInfo {
   if (typeof window === "undefined") {
-    return { hostname: FALLBACK_HOST, subdomain: null, fullUrl: `https://${FALLBACK_HOST}` };
-  }
-
-  const currentUrl = new URL(window.location.href);
-  const fromParam = currentUrl.searchParams.get("from") || currentUrl.searchParams.get("ref");
-
-  if (fromParam) {
-    let rawFrom = fromParam.trim().toLowerCase();
-
-    // Si la valeur contient déjà ".stafprint.com" ou est juste le préfixe
-    const fullHost = rawFrom.includes(".")
-      ? rawFrom
-      : `${rawFrom}.${STAFPRINT_DOMAIN}`;
-
-    const sub = rawFrom.includes(".")
-      ? extractSubdomain(rawFrom)
-      : rawFrom;
-
     return {
-      hostname: fullHost,
-      subdomain: sub,
-      fullUrl: `https://${fullHost}${currentUrl.pathname}`,
+      hostname: FALLBACK_HOST,
+      subdomain: extractSubdomain(FALLBACK_HOST),
+      fullUrl: `https://${FALLBACK_HOST}`,
+      isStafprintDomain: true,
     };
   }
 
-  const host = window.location.hostname;
+  const searchParams = new URLSearchParams(window.location.search);
+  const originalUrlParam = searchParams.get("original_url") || searchParams.get("from");
+
+  let targetHostname = window.location.hostname;
+  let targetFullUrl = window.location.href;
+
+  // Si l'URL contient un paramètre renvoyant le domaine d'origine
+  if (originalUrlParam) {
+    try {
+      const parsedUrl = new URL(originalUrlParam);
+      targetHostname = parsedUrl.hostname;
+      targetFullUrl = originalUrlParam;
+    } catch {
+      // Si la valeur reçue est juste un nom d'hôte (ex: foo.stafprint.com)
+      if (!originalUrlParam.startsWith("http")) {
+        targetHostname = originalUrlParam;
+        targetFullUrl = `https://${originalUrlParam}`;
+      }
+    }
+  }
+
+  const isStafprint =
+    targetHostname.toLowerCase().endsWith(STAFPRINT_DOMAIN) ||
+    targetHostname.toLowerCase() === STAFPRINT_DOMAIN;
+
   return {
-    hostname: host,
-    subdomain: extractSubdomain(host),
-    fullUrl: window.location.href,
+    hostname: targetHostname,
+    subdomain: extractSubdomain(targetHostname),
+    fullUrl: targetFullUrl,
+    isStafprintDomain: isStafprint,
   };
 }
 
 export function useSubdomainDetector(): SubdomainInfo {
-  const [info, setInfo] = useState<SubdomainInfo>(() => {
-    const { hostname, subdomain, fullUrl } = resolveDetectedHost();
-    return {
-      hostname,
-      subdomain,
-      fullUrl,
-      isStafprintDomain:
-        hostname.toLowerCase().endsWith(STAFPRINT_DOMAIN) ||
-        hostname.toLowerCase() === STAFPRINT_DOMAIN,
-    };
-  });
+  const [info, setInfo] = useState<SubdomainInfo>(resolveContextInfo);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     const update = () => {
-      const { hostname, subdomain, fullUrl } = resolveDetectedHost();
-      setInfo({
-        hostname,
-        subdomain,
-        fullUrl,
-        isStafprintDomain:
-          hostname.toLowerCase().endsWith(STAFPRINT_DOMAIN) ||
-          hostname.toLowerCase() === STAFPRINT_DOMAIN,
-      });
+      setInfo(resolveContextInfo());
     };
 
     update();
