@@ -48,7 +48,7 @@ export function DiagnosticHeader({ data, siteName }: DiagnosticHeaderProps) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `diagnostic-${data.hostname || "report"}.txt`;
+    link.download = `spc-notfound-diagnostic-${data.hostname || "report"}.txt`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
