@@ -1,8 +1,9 @@
 import { motion, type Variants } from "framer-motion";
 import { AlertTriangle, ArrowUpRight, Mail } from "lucide-react";
 import { SITE, SITE_LINK } from "@/data/site";
-import { contactMailto } from "@/lib/platformsData";
+import { getContactMailto } from "@/lib/platformsData";
 import { DiagnosticPanel } from "./DiagnosticPanel";
+import { useDetectedRegion, useLocalTime } from "./diagnostic";
 
 interface HeroSectionProps {
   displayDomain: string;
@@ -31,6 +32,21 @@ export function HeroSection({
   containerVariants,
   itemVariants,
 }: HeroSectionProps) {
+  const region = useDetectedRegion();
+  const { timeString, timeZoneOffset } = useLocalTime();
+
+  const diagnosticData = {
+    hostname,
+    subdomain,
+    fullUrl,
+    isStafprintDomain,
+    region,
+    timeString,
+    timeZoneOffset,
+  };
+
+  const mailtoUrl = getContactMailto(diagnosticData);
+
   return (
     <section className="px-4 pb-8 pt-12 sm:px-6 sm:pt-20 lg:px-8 lg:pt-24">
       <div className="mx-auto max-w-7xl">
@@ -87,7 +103,7 @@ export function HeroSection({
                 <ArrowUpRight className="h-4 w-4" />
               </a>
               <a
-                href={contactMailto}
+                href={mailtoUrl}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-3 font-sans text-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-staf-orange focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <Mail className="h-4 w-4" />
