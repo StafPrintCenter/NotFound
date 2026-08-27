@@ -24,7 +24,7 @@ export function DiagnosticRow({
   );
 }
 
-export function LocalTime() {
+export function useLocalTime() {
   const [timeString, setTimeString] = useState<string>("");
   const [timeZoneOffset, setTimeZoneOffset] = useState<string>("");
 
@@ -50,6 +50,10 @@ export function LocalTime() {
     return () => clearInterval(interval);
   }, []);
 
+  return { timeString, timeZoneOffset };
+}
+
+export function LocalTime({ timeString, timeZoneOffset }: { timeString: string; timeZoneOffset: string }) {
   return (
     <div className="flex items-center justify-between gap-4">
       <span className="flex items-center gap-1.5 text-muted-foreground">
@@ -64,9 +68,7 @@ export function LocalTime() {
   );
 }
 
-export function LocationRow() {
-  const region = useDetectedRegion();
-
+export function LocationRow({ region }: { region: string }) {
   return (
     <div className="flex items-center justify-between gap-4 border-t border-border/60 pt-3">
       <span className="flex items-center gap-1.5 text-muted-foreground">
@@ -78,7 +80,7 @@ export function LocationRow() {
   );
 }
 
-function useDetectedRegion() {
+export function useDetectedRegion() {
   const [region, setRegion] = useState<string>(() => getFallbackRegion());
 
   useEffect(() => {
