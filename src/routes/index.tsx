@@ -53,6 +53,11 @@ function NotFoundPage() {
 
   return (
     <div className="relative flex min-h-screen flex-col bg-background text-foreground">
+      <title>{dynamicTitle}</title>
+      <meta name="description" content={dynamicDesc} />
+      <meta property="og:title" content={dynamicTitle} />
+      <meta property="og:description" content={dynamicDesc} />
+
       <div className="pointer-events-none fixed inset-0 paper-grid opacity-[0.35]" aria-hidden="true" />
 
       <Header />
