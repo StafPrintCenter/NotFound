@@ -2,8 +2,12 @@ import { SITE } from "@/data/site";
 import {
   PlatformSearch,
   DiagnosticHeader,
-  DiagnosticRow, LocationRow, LocalTime,
-  DiagnosticTip
+  DiagnosticRow,
+  LocationRow,
+  LocalTime,
+  DiagnosticTip,
+  useDetectedRegion,
+  useLocalTime,
 } from "./diagnostic";
 
 interface DiagnosticPanelProps {
@@ -27,6 +31,19 @@ export function DiagnosticPanel({
   filteredCount,
   totalCount,
 }: DiagnosticPanelProps) {
+  const region = useDetectedRegion();
+  const { timeString, timeZoneOffset } = useLocalTime();
+
+  const diagnosticData = {
+    hostname,
+    subdomain,
+    fullUrl,
+    isStafprintDomain,
+    region,
+    timeString,
+    timeZoneOffset,
+  };
+
   return (
     <div className="space-y-5">
       <PlatformSearch
@@ -37,7 +54,7 @@ export function DiagnosticPanel({
       />
 
       <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
-        <DiagnosticHeader fullUrl={fullUrl} />
+        <DiagnosticHeader data={diagnosticData} siteName={SITE.name} />
 
         <div className="space-y-3 font-mono text-xs">
           <DiagnosticRow label="Hôte détecté" value={hostname} />
@@ -47,11 +64,10 @@ export function DiagnosticPanel({
             highlight={Boolean(subdomain)}
           />
           <DiagnosticRow label="URL complète" value={fullUrl} />
-          {/* <DiagnosticRow label={`Domaine ${SITE.name}`} value={isStafprintDomain ? "Oui" : "Non"} /> */}
-          <DiagnosticRow label={`Domaine ${SITE.name}`} value={"Non"} />
+          <DiagnosticRow label={`Domaine ${SITE.name}`} value={isStafprintDomain ? "Oui" : "Non"} />
 
-          <LocationRow />
-          <LocalTime />
+          <LocationRow region={region} />
+          <LocalTime timeString={timeString} timeZoneOffset={timeZoneOffset} />
         </div>
       </div>
 
