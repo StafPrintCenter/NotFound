@@ -61,7 +61,7 @@ function NotFoundPage() {
   }, [query]);
 
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-background text-foreground">
+    <div className="relative flex min-h-screen flex-col bg-background text-foreground">
       <div className="pointer-events-none fixed inset-0 paper-grid opacity-[0.35]" aria-hidden="true" />
 
       <Header />
