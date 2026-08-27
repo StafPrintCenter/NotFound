@@ -73,7 +73,7 @@ export function DiagnosticHeader({ data, siteName }: DiagnosticHeaderProps) {
           {copied ? (
             <>
               <Check className="h-3.5 w-3.5 text-emerald-600" />
-              Copié
+              <span className="hidden sm:inline">Copié</span>
             </>
           ) : (
             <>
