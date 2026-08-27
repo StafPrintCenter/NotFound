@@ -78,7 +78,7 @@ export function DiagnosticHeader({ data, siteName }: DiagnosticHeaderProps) {
           ) : (
             <>
               <Copy className="h-3.5 w-3.5" />
-              Copier le rapport
+              <span className="hidden sm:inline">Copier le rapport</span>
             </>
           )}
         </button>
