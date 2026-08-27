@@ -34,6 +34,10 @@ function NotFoundPage() {
   const mainDomain = stripProtocol(SITE_LINK.landingUrl);
   const displayDomain = isStafprintDomain && subdomain ? `${subdomain}.${mainDomain}` : hostname;
 
+  // Titre et description dynamiques basés sur le host détecté
+  const dynamicTitle = `404 ${displayDomain} inexistant | ${SITE.name}`;
+  const dynamicDesc = `Le sous-domaine ${displayDomain} est introuvable sur l’écosystème ${SITE.name}. Redirection rapide vers les plateformes officielles.`;
+
   const filteredPlatforms = useMemo(() => {
     if (!query.trim()) return platforms;
     const q = query.toLowerCase().trim();
