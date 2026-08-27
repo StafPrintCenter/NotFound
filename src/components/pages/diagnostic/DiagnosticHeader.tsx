@@ -23,7 +23,7 @@ export function DiagnosticHeader({ fullUrl }: { fullUrl: string }) {
       <button
         type="button"
         onClick={handleCopyUrl}
-        className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 py-1.5 font-sans text-xs font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-staf-orange"
+        className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 py-1.5 font-sans text-xs font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-staf-orange cursor-pointer"
         aria-label="Copier l’URL complète"
       >
         {copied ? (
