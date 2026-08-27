@@ -66,7 +66,7 @@ function NotFoundPage() {
 
       <Header />
 
-      <main className="relative z-10 flex flex-1 flex-col">
+      <main className="relative z-10 flex flex-1 flex-col overflow-x-hidden">
         <HeroSection
           displayDomain={displayDomain}
           hostname={hostname}
