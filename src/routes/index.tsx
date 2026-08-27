@@ -6,9 +6,6 @@ import { stripProtocol } from "@/lib/domain";
 import { SITE, SITE_LINK } from "@/data/site";
 import { Header, Footer, HeroSection, PlatformHub } from "@/components/pages";
 
-const NOTFOUND_TITLE = `404 Sous-domaine inexistant | ${SITE.name}`;
-const NOTFOUND_DESC = `Catch-all 404 de l’écosystème ${SITE.name}. Redirection rapide vers les plateformes officielles.`;
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
