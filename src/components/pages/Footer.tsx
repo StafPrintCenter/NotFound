@@ -1,6 +1,6 @@
 import { Mail } from "lucide-react";
 import { SITE } from "@/data/site";
-import { contactMailto } from "@/lib/platformsData";
+import { getContactMailto } from "@/lib/platformsData";
 
 export function Footer() {
   return (
@@ -11,7 +11,7 @@ export function Footer() {
         </p>
 
         <a
-          href={contactMailto}
+          href={getContactMailto()}
           className="group inline-flex items-center justify-center gap-2 justify-self-center rounded-full border border-staf-orange/30 bg-background px-5 py-2.5 font-sans text-sm font-medium text-staf-orange-deep transition-all hover:bg-staf-orange/10 hover:shadow-staf focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-staf sm:justify-self-end"
         >
           <Mail className="h-4 w-4 transition-transform group-hover:-rotate-12" />
