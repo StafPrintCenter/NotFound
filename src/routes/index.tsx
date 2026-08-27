@@ -7,16 +7,6 @@ import { SITE, SITE_LINK } from "@/data/site";
 import { Header, Footer, HeroSection, PlatformHub } from "@/components/pages";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: NOTFOUND_TITLE },
-      { name: "description", content: NOTFOUND_DESC },
-      { property: "og:title", content: NOTFOUND_TITLE },
-      { property: "og:description", content: NOTFOUND_DESC },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-    ],
-  }),
   component: NotFoundPage,
 });
 
