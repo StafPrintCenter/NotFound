@@ -19,6 +19,7 @@ interface DiagnosticPanelProps {
   setQuery: (val: string) => void;
   filteredCount: number;
   totalCount: number;
+  isLoading?: boolean;
 }
 
 export function DiagnosticPanel({
@@ -30,6 +31,7 @@ export function DiagnosticPanel({
   setQuery,
   filteredCount,
   totalCount,
+  isLoading,
 }: DiagnosticPanelProps) {
   const region = useDetectedRegion();
   const { timeString, timeZoneOffset } = useLocalTime();
@@ -44,14 +46,28 @@ export function DiagnosticPanel({
     timeZoneOffset,
   };
 
+  const fullUrlLink = (
+    <a
+      href={fullUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-staf-orange hover:underline break-all"
+    >
+      {fullUrl}
+    </a>
+  );
+
   return (
     <div className="space-y-5">
-      <PlatformSearch
-        query={query}
-        setQuery={setQuery}
-        filteredCount={filteredCount}
-        totalCount={totalCount}
-      />
+      <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
+        <PlatformSearch
+          query={query}
+          setQuery={setQuery}
+          filteredCount={filteredCount}
+          totalCount={totalCount}
+          isLoading={isLoading}
+        />
+      </div>
 
       <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
         <DiagnosticHeader data={diagnosticData} siteName={SITE.name} />
@@ -63,7 +79,7 @@ export function DiagnosticPanel({
             value={subdomain ?? "Aucun (apex)"}
             highlight={Boolean(subdomain)}
           />
-          <DiagnosticRow label="URL complète" value={fullUrl} />
+          <DiagnosticRow label="URL complète" value={fullUrlLink} titleText={fullUrl} />
           <DiagnosticRow label={`Domaine ${SITE.name}`} value={isStafprintDomain ? "Oui" : "Non"} />
 
           <LocationRow region={region} />
