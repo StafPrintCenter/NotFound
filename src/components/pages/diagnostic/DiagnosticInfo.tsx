@@ -1,22 +1,26 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { MapPin, Clock } from "lucide-react";
 
 export function DiagnosticRow({
   label,
   value,
   highlight,
+  titleText,
 }: {
   label: string;
-  value: string;
+  value: ReactNode;
   highlight?: boolean;
+  titleText?: string;
 }) {
+  const displayTitle = titleText ?? (typeof value === "string" ? value : undefined);
+
   return (
     <div className="flex items-center justify-between gap-4">
       <span className="text-muted-foreground">{label}</span>
       <span
         className={`max-w-[60%] truncate text-right ${highlight ? "font-semibold text-staf-coral" : "text-foreground"
           }`}
-        title={value}
+        title={displayTitle}
       >
         {value}
       </span>
