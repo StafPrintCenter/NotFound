@@ -1,7 +1,7 @@
 import { motion, type Variants } from "framer-motion";
 import { AlertTriangle, ArrowUpRight, Mail } from "lucide-react";
 import { SITE, SITE_LINK } from "@/data/site";
-import { getContactMailto } from "@/lib/platformsData";
+import { getContactMailto } from "@/lib/mail";
 import { DiagnosticPanel } from "./DiagnosticPanel";
 import { useDetectedRegion, useLocalTime } from "./diagnostic";
 
