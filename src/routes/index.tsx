@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useSubdomainDetector } from "@/lib/useSubdomainDetector";
-import { platforms } from "@/lib/platformsData";
+import { useEcosystemSitesStore } from "@/stores/useEcosystemSitesStore";
 import { stripProtocol } from "@/lib/domain";
 import { SITE, SITE_LINK } from "@/data/site";
 import { Header, Footer, HeroSection, PlatformHub } from "@/components/pages";
@@ -31,25 +31,13 @@ function NotFoundPage() {
   const { hostname, subdomain, fullUrl, isStafprintDomain } = useSubdomainDetector();
   const [query, setQuery] = useState("");
 
+  const { sites, isLoading } = useEcosystemSitesStore({ query });
+
   const mainDomain = stripProtocol(SITE_LINK.landingUrl);
   const displayDomain = isStafprintDomain && subdomain ? `${subdomain}.${mainDomain}` : hostname;
 
-  // Titre et description dynamiques basés sur le host détecté
   const dynamicTitle = `404 "${subdomain}" inexistant | ${SITE.name}`;
   const dynamicDesc = `Le sous-domaine "${subdomain}" est introuvable sur l’écosystème ${SITE.name}. Redirection rapide vers les plateformes officielles.`;
-
-  const filteredPlatforms = useMemo(() => {
-    if (!query.trim()) return platforms;
-    const q = query.toLowerCase().trim();
-    return platforms.filter((p) => {
-      const domain = stripProtocol(p.url).toLowerCase();
-      return (
-        p.name.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q) ||
-        domain.includes(q)
-      );
-    });
-  }, [query]);
 
   return (
     <div className="relative flex min-h-screen flex-col bg-background text-foreground">
@@ -71,16 +59,17 @@ function NotFoundPage() {
           isStafprintDomain={isStafprintDomain}
           query={query}
           setQuery={setQuery}
-          filteredCount={filteredPlatforms.length}
-          totalCount={platforms.length}
+          filteredCount={sites.length}
+          totalCount={sites.length}
           containerVariants={containerVariants}
           itemVariants={itemVariants}
         />
 
         <PlatformHub
+          isLoading={isLoading}
           query={query}
           setQuery={setQuery}
-          filteredPlatforms={filteredPlatforms}
+          filteredPlatforms={sites}
           containerVariants={containerVariants}
           itemVariants={itemVariants}
         />
