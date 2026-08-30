@@ -3,12 +3,14 @@ import { X } from "lucide-react";
 import type { APIEcosystemSite } from "@/data/ecosystem";
 import { PlatformCard } from "./PlatformCard";
 import { PlatformSkeleton } from "./PlatformSkeleton";
+import { PlatformSearch } from "./diagnostic/PlatformSearch";
 
 interface PlatformHubProps {
   isLoading: boolean;
   query: string;
   setQuery: (q: string) => void;
   filteredPlatforms: APIEcosystemSite[];
+  totalCount: number;
   containerVariants: Variants;
   itemVariants: Variants;
 }
@@ -18,6 +20,7 @@ export function PlatformHub({
   query,
   setQuery,
   filteredPlatforms,
+  totalCount,
   containerVariants,
   itemVariants,
 }: PlatformHubProps) {
@@ -29,13 +32,28 @@ export function PlatformHub({
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={itemVariants} className="mb-6">
-          <h2 className="font-display text-xl font-semibold text-foreground sm:text-2xl">
-            Plateformes officielles
-          </h2>
-          <p className="mt-1 font-sans text-sm text-muted-foreground">
-            Choisissez directement la destination adaptée à votre besoin.
-          </p>
+        <motion.div
+          variants={itemVariants}
+          className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
+        >
+          <div>
+            <h2 className="font-display text-xl font-semibold text-foreground sm:text-2xl">
+              Plateformes officielles
+            </h2>
+            <p className="mt-1 font-sans text-sm text-muted-foreground">
+              Choisissez directement la destination adaptée à votre besoin.
+            </p>
+          </div>
+
+          <div className="w-full lg:w-96">
+            <PlatformSearch
+              query={query}
+              setQuery={setQuery}
+              filteredCount={filteredPlatforms.length}
+              totalCount={totalCount}
+              isLoading={isLoading}
+            />
+          </div>
         </motion.div>
 
         <AnimatePresence mode="popLayout">
