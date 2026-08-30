@@ -79,7 +79,3 @@ export const platforms: Platform[] = [
     status: "available",
   },
 ];
-
-export const contactMailto = `mailto:${SITE.email}?subject=${encodeURIComponent(
-  "[Signalement 404] Sous-domaine inexistant"
-)}`;
