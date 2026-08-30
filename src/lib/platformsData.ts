@@ -1,6 +1,5 @@
 import logos from "@/assets/logos.json";
 import { SITE, SITE_LINK } from "@/data/site";
-import type { DiagnosticData } from "@/components/pages/diagnostic/DiagnosticHeader";
 
 export type PlatformStatus = "available" | "building";
 
