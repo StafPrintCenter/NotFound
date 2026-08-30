@@ -28,7 +28,3 @@ export function getContactMailto(data?: Partial<DiagnosticData>): string {
 
   return `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
-
-export const contactMailto = `mailto:${SITE.email}?subject=${encodeURIComponent(
-  "[Signalement 404] Sous-domaine inexistant"
-)}`;
