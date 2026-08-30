@@ -1,24 +1,23 @@
 import { ArrowUpRight, CheckCircle2, Construction } from "lucide-react";
-import logos from "@/assets/logos.json";
 import { stripProtocol } from "@/lib/domain";
-import type { Platform } from "@/lib/platformsData";
+import type { APIEcosystemSite } from "@/data/ecosystem";
 
-export function PlatformCard({ platform }: { platform: Platform }) {
-  const logoUrl = logos[platform.logoKey];
+export function PlatformCard({ platform }: { platform: APIEcosystemSite }) {
+  const logoSrc = platform.logoUrl || platform.logoVariants?.mc;
   const domainDisplay = stripProtocol(platform.url);
   const isBuilding = platform.status === "building";
 
   return (
     <a
       href={platform.url}
-      target={platform.isExternal ? "_blank" : undefined}
-      rel={platform.isExternal ? "noopener noreferrer" : undefined}
+      target="_blank"
+      rel="noopener noreferrer"
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-5 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-staf-orange/40 hover:bg-card/95 hover:shadow-lg hover:shadow-staf-orange/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-staf-orange focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:p-6"
     >
       <div className="mb-4 flex items-start justify-between gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-border/40 bg-background/50 p-1.5 shadow-xs transition-colors duration-500 group-hover:border-staf-orange/20">
           <img
-            src={logoUrl}
+            src={logoSrc}
             alt={`${platform.name} logo`}
             className="h-full w-full object-contain"
           />
