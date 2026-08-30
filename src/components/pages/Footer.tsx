@@ -1,6 +1,6 @@
 import { Mail } from "lucide-react";
 import { SITE } from "@/data/site";
-import { getContactMailto } from "@/lib/platformsData";
+import { getContactMailto } from "@/lib/mail";
 
 export function Footer() {
   return (
