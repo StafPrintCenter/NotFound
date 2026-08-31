@@ -116,10 +116,6 @@ export function HeroSection({
               subdomain={subdomain}
               fullUrl={fullUrl}
               isStafprintDomain={isStafprintDomain}
-              query={query}
-              setQuery={setQuery}
-              filteredCount={filteredCount}
-              totalCount={totalCount}
             />
           </motion.div>
         </div>
