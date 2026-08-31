@@ -38,23 +38,15 @@ export function PlatformSearch({
     inputValue.trim().length > 0 && inputValue.trim().length < 2;
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
-      <label
-        htmlFor="platform-search"
-        className="mb-3 flex items-center gap-2 font-display text-sm font-semibold text-card-foreground"
-      >
-        <Search className="h-4 w-4 text-staf-orange" />
-        Trouver une plateforme
-      </label>
-
-      <form onSubmit={handleSubmit} className="relative flex items-center gap-2">
+    <div className="w-full">
+      <form onSubmit={handleSubmit} className="flex items-center gap-2">
         <div className="relative flex-1">
           <input
             id="platform-search"
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Ex: docs, meet, learn, arcade…"
+            placeholder="Rechercher (ex: docs, meet, arcade...)"
             className="w-full rounded-xl border border-border bg-background px-4 py-2.5 pl-10 pr-9 font-sans text-sm text-foreground placeholder:text-muted-foreground focus:border-staf-orange/50 focus:outline-none focus:ring-2 focus:ring-staf-orange/20"
             aria-label="Rechercher une plateforme officielle"
           />
@@ -74,22 +66,20 @@ export function PlatformSearch({
         <button
           type="submit"
           disabled={isButtonDisabled}
-          className="rounded-xl bg-staf-orange px-4 py-2.5 font-sans text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+          className="shrink-0 rounded-xl bg-staf-orange px-4 py-2.5 font-sans text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Rechercher
         </button>
       </form>
 
-      {isButtonDisabled && (
-        <p className="mt-1.5 font-sans text-xs text-destructive">
+      {isButtonDisabled ? (
+        <p className="mt-1 font-sans text-xs text-destructive">
           Saisissez au moins 2 caractères pour rechercher.
         </p>
-      )}
-
-      {isLoading ? (
-        <div className="mt-2 h-4 w-36 animate-pulse rounded bg-muted" />
+      ) : isLoading ? (
+        <div className="mt-1 h-3.5 w-24 animate-pulse rounded bg-muted" />
       ) : (
-        <p className="mt-2 font-sans text-xs text-muted-foreground">
+        <p className="mt-1 font-sans text-xs text-muted-foreground">
           {filteredCount} plateforme{filteredCount > 1 ? "s" : ""} trouvée
           {filteredCount > 1 ? "s" : ""} sur {totalCount}
         </p>
