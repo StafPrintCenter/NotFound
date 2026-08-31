@@ -31,7 +31,9 @@ function NotFoundPage() {
   const { hostname, subdomain, fullUrl, isStafprintDomain } = useSubdomainDetector();
   const [query, setQuery] = useState("");
 
-  const { sites, isLoading } = useEcosystemSitesStore({ query });
+  const { sites: filteredSites, isLoading } = useEcosystemSitesStore({ query });
+
+  const { sites: allSites } = useEcosystemSitesStore({ query: "" });
 
   const mainDomain = stripProtocol(SITE_LINK.landingUrl);
   const displayDomain = isStafprintDomain && subdomain ? `${subdomain}.${mainDomain}` : hostname;
@@ -59,8 +61,8 @@ function NotFoundPage() {
           isStafprintDomain={isStafprintDomain}
           query={query}
           setQuery={setQuery}
-          filteredCount={sites.length}
-          totalCount={sites.length}
+          filteredCount={filteredSites.length}
+          totalCount={allSites.length}
           containerVariants={containerVariants}
           itemVariants={itemVariants}
         />
@@ -69,7 +71,8 @@ function NotFoundPage() {
           isLoading={isLoading}
           query={query}
           setQuery={setQuery}
-          filteredPlatforms={sites}
+          filteredPlatforms={filteredSites}
+          totalCount={allSites.length}
           containerVariants={containerVariants}
           itemVariants={itemVariants}
         />
