@@ -40,7 +40,7 @@ export function HeroSection({
   const mailtoUrl = getContactMailto(diagnosticData);
 
   return (
-    <section className="px-4 pb-8 pt-12 sm:px-6 lg:px-8">
+    <section className="px-4 pb-8 pt-12 sm:px-6">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Gauche : Titre et actions */}
