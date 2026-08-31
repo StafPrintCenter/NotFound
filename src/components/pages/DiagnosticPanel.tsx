@@ -26,11 +26,6 @@ export function DiagnosticPanel({
   subdomain,
   fullUrl,
   isStafprintDomain,
-  query,
-  setQuery,
-  filteredCount,
-  totalCount,
-  isLoading,
 }: DiagnosticPanelProps) {
   const region = useDetectedRegion();
   const { timeString, timeZoneOffset } = useLocalTime();
