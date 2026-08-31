@@ -45,7 +45,7 @@ export function PlatformHub({
             </p>
           </div>
 
-          <div className="w-full lg:w-md shrink-0">
+          <div className="w-full lg:w-96 shrink-0">
             <PlatformSearch
               query={query}
               setQuery={setQuery}
