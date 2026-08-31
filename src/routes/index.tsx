@@ -4,7 +4,8 @@ import { useSubdomainDetector } from "@/lib/useSubdomainDetector";
 import { useEcosystemSitesStore } from "@/stores/useEcosystemSitesStore";
 import { stripProtocol } from "@/lib/domain";
 import { SITE, SITE_LINK } from "@/data/site";
-import { Header, Footer, HeroSection, PlatformHub } from "@/components/pages";
+import { Header, Footer } from "@/components/site";
+import { HeroSection, PlatformHub } from "@/components/pages";
 
 export const Route = createFileRoute("/")({
   component: NotFoundPage,
