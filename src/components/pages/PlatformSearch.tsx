@@ -66,7 +66,7 @@ export function PlatformSearch({
         <button
           type="submit"
           disabled={isButtonDisabled}
-          className="shrink-0 rounded-xl bg-staf-orange px-4 py-2.5 font-sans text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+          className="shrink-0 rounded-xl bg-staf-orange px-4 py-2.5 font-sans text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
         >
           Rechercher
         </button>
