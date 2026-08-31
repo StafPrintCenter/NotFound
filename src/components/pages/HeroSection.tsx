@@ -21,10 +21,6 @@ export function HeroSection({
   subdomain,
   fullUrl,
   isStafprintDomain,
-  query,
-  setQuery,
-  filteredCount,
-  totalCount,
   containerVariants,
   itemVariants,
 }: HeroSectionProps) {
