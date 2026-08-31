@@ -59,10 +59,6 @@ function NotFoundPage() {
           subdomain={subdomain}
           fullUrl={fullUrl}
           isStafprintDomain={isStafprintDomain}
-          query={query}
-          setQuery={setQuery}
-          filteredCount={filteredSites.length}
-          totalCount={allSites.length}
           containerVariants={containerVariants}
           itemVariants={itemVariants}
         />
