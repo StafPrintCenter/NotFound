@@ -47,7 +47,7 @@ export function PlatformSearch({
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Rechercher (ex: docs, meet, arcade...)"
-            className="w-full rounded-xl border border-border bg-background px-4 py-2.5 pl-10 pr-9 font-sans text-sm text-foreground placeholder:text-muted-foreground focus:border-staf-orange/50 focus:outline-none focus:ring-2 focus:ring-staf-orange/20"
+            className="w-full rounded-xl border border-border bg-card px-4 py-2.5 pl-10 pr-9 font-sans text-sm text-foreground placeholder:text-muted-foreground focus:border-staf-orange/50 focus:outline-none focus:ring-2 focus:ring-staf-orange/20 "
             aria-label="Rechercher une plateforme officielle"
           />
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
