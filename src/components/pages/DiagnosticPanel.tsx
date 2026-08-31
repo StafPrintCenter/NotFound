@@ -14,11 +14,6 @@ interface DiagnosticPanelProps {
   subdomain: string | null;
   fullUrl: string;
   isStafprintDomain: boolean;
-  query: string;
-  setQuery: (val: string) => void;
-  filteredCount: number;
-  totalCount: number;
-  isLoading?: boolean;
 }
 
 export function DiagnosticPanel({
