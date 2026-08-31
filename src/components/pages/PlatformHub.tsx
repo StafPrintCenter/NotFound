@@ -34,9 +34,9 @@ export function PlatformHub({
       >
         <motion.div
           variants={itemVariants}
-          className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"
+          className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between"
         >
-          <div>
+          <div className="flex-1">
             <h2 className="font-display text-xl font-semibold text-foreground sm:text-2xl">
               Plateformes officielles
             </h2>
@@ -45,7 +45,7 @@ export function PlatformHub({
             </p>
           </div>
 
-          <div className="w-full lg:w-96">
+          <div className="w-full lg:w-md shrink-0">
             <PlatformSearch
               query={query}
               setQuery={setQuery}
