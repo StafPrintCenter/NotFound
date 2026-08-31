@@ -34,8 +34,8 @@ export function PlatformSearch({
     setQuery("");
   };
 
-  const isButtonDisabled =
-    inputValue.trim().length > 0 && inputValue.trim().length < 2;
+  const isButtonDisabled = inputValue.trim().length > 0 && inputValue.trim().length < 2;
+  const realTotal = Math.max(totalCount, filteredCount);
 
   return (
     <div className="w-full">
@@ -73,15 +73,15 @@ export function PlatformSearch({
       </form>
 
       {isButtonDisabled ? (
-        <p className="mt-1 font-sans text-xs text-destructive">
+        <p className="mt-1.5 font-sans text-xs text-destructive">
           Saisissez au moins 2 caractères pour rechercher.
         </p>
       ) : isLoading ? (
-        <div className="mt-1 h-3.5 w-24 animate-pulse rounded bg-muted" />
+        <div className="mt-1.5 h-3.5 w-28 animate-pulse rounded bg-muted" />
       ) : (
-        <p className="mt-1 font-sans text-xs text-muted-foreground">
+        <p className="mt-1.5 font-sans text-xs text-muted-foreground">
           {filteredCount} plateforme{filteredCount > 1 ? "s" : ""} trouvée
-          {filteredCount > 1 ? "s" : ""} sur {totalCount}
+          {filteredCount > 1 ? "s" : ""} sur {realTotal}
         </p>
       )}
     </div>
