@@ -33,7 +33,6 @@ function NotFoundPage() {
   const [query, setQuery] = useState("");
 
   const { sites: filteredSites, isLoading } = useEcosystemSitesStore({ query });
-
   const { sites: allSites } = useEcosystemSitesStore({ query: "" });
 
   const mainDomain = stripProtocol(SITE_LINK.landingUrl);
