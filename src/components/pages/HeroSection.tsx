@@ -11,10 +11,6 @@ interface HeroSectionProps {
   subdomain: string | null;
   fullUrl: string;
   isStafprintDomain: boolean;
-  query: string;
-  setQuery: (q: string) => void;
-  filteredCount: number;
-  totalCount: number;
   containerVariants: Variants;
   itemVariants: Variants;
 }
