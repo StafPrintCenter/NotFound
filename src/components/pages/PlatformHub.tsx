@@ -1,9 +1,7 @@
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { X } from "lucide-react";
 import type { APIEcosystemSite } from "@/data/ecosystem";
-import { PlatformCard } from "./PlatformCard";
-import { PlatformSkeleton } from "./PlatformSkeleton";
-import { PlatformSearch } from "./diagnostic/PlatformSearch";
+import { PlatformCard, PlatformSearch, PlatformSkeleton } from "./";
 
 interface PlatformHubProps {
   isLoading: boolean;
