@@ -101,7 +101,7 @@ export function PlatformHub({
               <button
                 type="button"
                 onClick={() => setQuery("")}
-                className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 font-sans text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 font-sans text-sm font-medium text-foreground transition-colors hover:bg-accent cursor-pointer"
               >
                 <X className="h-4 w-4" />
                 Effacer la recherche
