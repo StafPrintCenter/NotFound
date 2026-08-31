@@ -38,7 +38,7 @@ export function DiagnosticPanel({
   const fullUrlLink = (
     <a
       href={fullUrl}
-      target="_blank"
+      target="_self"
       rel="noopener noreferrer"
       className="text-staf-orange hover:underline break-all"
     >
