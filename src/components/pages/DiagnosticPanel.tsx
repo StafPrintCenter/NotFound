@@ -1,6 +1,5 @@
 import { SITE } from "@/data/site";
 import {
-  PlatformSearch,
   DiagnosticHeader,
   DiagnosticRow,
   LocationRow,
@@ -59,16 +58,6 @@ export function DiagnosticPanel({
 
   return (
     <div className="space-y-5">
-      <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
-        <PlatformSearch
-          query={query}
-          setQuery={setQuery}
-          filteredCount={filteredCount}
-          totalCount={totalCount}
-          isLoading={isLoading}
-        />
-      </div>
-
       <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
         <DiagnosticHeader data={diagnosticData} siteName={SITE.name} />
 
