@@ -1,5 +1,5 @@
 import { SITE } from "@/data/site";
-import type { DiagnosticData } from "@/components/pages/diagnostic/DiagnosticHeader";
+import type { DiagnosticData } from "@/components/pages/diagnostic/Header";
 
 export function getContactMailto(data?: Partial<DiagnosticData>): string {
   const subject = `[Signalement 404] Sous-domaine inexistant - ${data?.hostname || "Inconnu"}`;
