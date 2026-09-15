@@ -4,7 +4,7 @@ import { useSubdomainDetector } from "@/lib/useSubdomainDetector";
 import { useEcosystemSitesStore } from "@/stores/useEcosystemSitesStore";
 import { stripProtocol } from "@/lib/domain";
 import { SITE, SITE_LINK } from "@/data/site";
-import { Header, Footer } from "@/components/site";
+import { PageShell } from "@/components/site";
 import { HeroSection, PlatformHub } from "@/components/pages";
 
 export const Route = createFileRoute("/")({
@@ -42,39 +42,37 @@ function NotFoundPage() {
   const dynamicDesc = `Le sous-domaine "${subdomain}" est introuvable sur l’écosystème ${SITE.name}. Redirection rapide vers les plateformes officielles.`;
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-background text-foreground">
+    <div className="relative flex  bg-background text-foreground">
       <title>{dynamicTitle}</title>
       <meta name="description" content={dynamicDesc} />
       <meta property="og:title" content={dynamicTitle} />
       <meta property="og:description" content={dynamicDesc} />
 
-      <div className="pointer-events-none fixed inset-0 paper-grid opacity-[0.35]" aria-hidden="true" />
+      <PageShell>
 
-      <Header />
+        <main className="relative z-10 flex flex-1 flex-col overflow-x-hidden">
+          <HeroSection
+            displayDomain={displayDomain}
+            hostname={hostname}
+            subdomain={subdomain}
+            fullUrl={fullUrl}
+            isStafprintDomain={isStafprintDomain}
+            containerVariants={containerVariants}
+            itemVariants={itemVariants}
+          />
 
-      <main className="relative z-10 flex flex-1 flex-col overflow-x-hidden">
-        <HeroSection
-          displayDomain={displayDomain}
-          hostname={hostname}
-          subdomain={subdomain}
-          fullUrl={fullUrl}
-          isStafprintDomain={isStafprintDomain}
-          containerVariants={containerVariants}
-          itemVariants={itemVariants}
-        />
+          <PlatformHub
+            isLoading={isLoading}
+            query={query}
+            setQuery={setQuery}
+            filteredPlatforms={filteredSites}
+            totalCount={allSites.length}
+            containerVariants={containerVariants}
+            itemVariants={itemVariants}
+          />
+        </main>
 
-        <PlatformHub
-          isLoading={isLoading}
-          query={query}
-          setQuery={setQuery}
-          filteredPlatforms={filteredSites}
-          totalCount={allSites.length}
-          containerVariants={containerVariants}
-          itemVariants={itemVariants}
-        />
-      </main>
-
-      <Footer />
+      </PageShell>
     </div>
   );
 }
