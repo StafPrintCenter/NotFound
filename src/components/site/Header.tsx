@@ -1,5 +1,6 @@
 import logo from "@/assets/logos.json";
 import { SITE_LINK } from "@/data/site";
+import { SpcDeskLogo, SpcMobLogo } from "@/components/site";
 
 export function Header() {
   return (
