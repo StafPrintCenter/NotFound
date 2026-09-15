@@ -1,9 +1,11 @@
 import { ArrowUpRight, CheckCircle2, Construction } from "lucide-react";
 import { stripProtocol } from "@/lib/domain";
 import type { APIEcosystemSite } from "@/data/ecosystem";
+import { useDarkMode } from "@/hooks/use-dark-mode";
 
 export function PlatformCard({ platform }: { platform: APIEcosystemSite }) {
-  const logoSrc = platform.logoUrl || platform.logoVariants?.mc;
+  const dark = useDarkMode();
+  const logoSrc = dark ? platform.logoVariants.mw : platform.logoVariants.mc;
   const domainDisplay = stripProtocol(platform.url);
   const isBuilding = platform.status === "building";
 
