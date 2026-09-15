@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Header, Footer } from ".";
 
-export function BriefShell({ children }: { children: ReactNode }) {
+export function PageShell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
