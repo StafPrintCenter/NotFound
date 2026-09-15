@@ -42,15 +42,14 @@ function NotFoundPage() {
   const dynamicDesc = `Le sous-domaine "${subdomain}" est introuvable sur l’écosystème ${SITE.name}. Redirection rapide vers les plateformes officielles.`;
 
   return (
-    <div className="relative flex  bg-background text-foreground">
+    <div>
       <title>{dynamicTitle}</title>
       <meta name="description" content={dynamicDesc} />
       <meta property="og:title" content={dynamicTitle} />
       <meta property="og:description" content={dynamicDesc} />
 
       <PageShell>
-
-        <main className="relative z-10 flex flex-1 flex-col overflow-x-hidden">
+        <main className="relative z-10 overflow-x-hidden">
           <HeroSection
             displayDomain={displayDomain}
             hostname={hostname}
@@ -71,7 +70,6 @@ function NotFoundPage() {
             itemVariants={itemVariants}
           />
         </main>
-
       </PageShell>
     </div>
   );
