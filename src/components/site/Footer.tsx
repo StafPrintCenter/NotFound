@@ -14,7 +14,8 @@ export function Footer() {
 
   return (
     <footer className="relative z-10 border-t border-border/60 bg-background/80 px-4 py-8 backdrop-blur-md sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-4 sm:grid-cols-[minmax(0,1fr)_auto]">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row">
+        {/* Copyright */}
         <p className="text-center font-sans text-sm text-muted-foreground sm:text-left">
           © {new Date().getFullYear()} {SITE.name} - {SITE.slogan}.
         </p>
