@@ -4,6 +4,14 @@ import { getContactMailto } from "@/lib/mail";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon, WhatsAppIcon } from "@/components/site/icons";
 
 export function Footer() {
+  const socialLinks = [
+    { label: "Facebook", href: SITE.socials.facebook, Icon: FacebookIcon },
+    { label: "Instagram", href: SITE.socials.instagram, Icon: InstagramIcon },
+    { label: "LinkedIn", href: SITE.socials.linkedin, Icon: LinkedinIcon },
+    { label: "X", href: SITE.socials.x, Icon: XIcon },
+    { label: "WhatsApp", href: SITE.whatsappLink, Icon: WhatsAppIcon },
+  ];
+
   return (
     <footer className="relative z-10 border-t border-border/60 bg-background/80 px-4 py-8 backdrop-blur-md sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-4 sm:grid-cols-[minmax(0,1fr)_auto]">
