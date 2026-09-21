@@ -1,6 +1,7 @@
 import { Mail } from "lucide-react";
 import { SITE } from "@/data/site";
 import { getContactMailto } from "@/lib/mail";
+import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon, WhatsAppIcon } from "@/components/site/icons";
 
 export function Footer() {
   return (
